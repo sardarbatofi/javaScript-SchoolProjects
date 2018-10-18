@@ -1,0 +1,76 @@
+<html>	
+	<script>
+	
+		/*This is the board*/
+	
+		/*This function contains two "forloop one for the x positions and the other for y positions"*/
+		/*This is the board*/
+    
+        /*This function contains two "forloop one for the x positions and the other for y positions"*/
+        function createBoard (cell){
+            var xCoordinates= ['A','B','C','D','E','F','G','H'];
+            var chessBoardLetter =  xCoordinates.indexOf(cell[0]) + 1; //The X Position
+            var chessBoardNumbers= parseInt(cell[1]); //The Y Position;
+            var iframe = [];
+            var knightCoordinates =[];
+        
+            for(let n=0; n < 8; n++){
+            for(let l = 0; l < 8; l++){
+                let board ={
+                    boardNumbers: chessBoardNumbers[n],
+                    boardLetter: chessBoardLetter[l]
+                };
+                iframe.push( board);
+            
+                }
+            } 
+            return iframe;
+        
+
+       
+       			 /*Find all knight letter positions*/
+   				 var knightXpositions = [chessBoardLetter + 2, chessBoardLetter - 2, chessBoardLetter + 1, chessBoardLetter - 1].filter(function(knightPosition) {
+        			 return (knightPosition > 0 && knightPosition < 9);
+    				})
+    
+    			/*Find all knight number positions*/
+    			var knightYpositions = [chessBoardNumbers + 2, chessBoardNumbers - 2, chessBoardNumbers + 1, chessBoardNumbers - 1].filter(function(knightPosition) {
+       			 return (knightPosition > 0 && knightPosition < 9);
+   				 })
+    
+    		/*we have 2 seperate arrays one for knight number possetions(y) and one for knightxpositions.
+			Go thru every combination possible and if it is a valid position then push it it goes through every possible coordinate and if its valid then push it else show already.
+			Validate the knightletterposition and knightnumber possition through making sure that x and y distance is 3
+    		The trick is to validate the position pair (X, Y) by making sure that */
+
+    		for (var n = 0; n < knightXpositions.length; n++) {
+     		   for (var l = 0; l < knightYpositions.length; l++) {
+           			 if (Math.abs(chessBoardLetter - knightXpositions[n]) + Math.abs(chessBoardNumbers - knightYpositions[l]) === 3) {
+               		 console.log('This is a valid coordinate: ', [knightXpositions[n], knightYpositions[l]]);
+               		 }
+
+               		 if (!knightCoordinates.includes([knightXpositions[n], knightYpositions[l]])) {
+                   	 knightCoordinates.push([knightXpositions[n], knightYpositions[l]]);
+              		  } 
+            	
+            	}
+        	}
+    
+
+    	console.log('Knight Coordinates:', knightCoordinates);
+    	console.log ('Knight Moves:', knightCoordinates.length);
+    	return knightCoordinates.length;
+         
+	 }
+    
+        var chessBoard  = createBoard();
+        console.log("The board:", chessBoard);
+
+         
+
+     
+		
+	</script>
+
+
+</html>
